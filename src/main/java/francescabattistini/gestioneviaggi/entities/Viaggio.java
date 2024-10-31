@@ -16,16 +16,14 @@ public class Viaggio {
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
-    private int viaggioId;
+    private int id;
     private String destinazione;
     private LocalDate dataviaggio;
-    private String inprogramma;
-    private String completato;
+    private String statoProgrammazione;
 
-    public Viaggio(String destinazione, LocalDate dataviaggio, String inprogramma, String completato) {
+    public Viaggio(String destinazione, LocalDate dataviaggio, String statoProgrammazione) {
         this.destinazione = destinazione;
         this.dataviaggio = dataviaggio;
-        this.inprogramma = inprogramma;
-        this.completato = completato;
+        this.statoProgrammazione = statoProgrammazione;
     }
 }

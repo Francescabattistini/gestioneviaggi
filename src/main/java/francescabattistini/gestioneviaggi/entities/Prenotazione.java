@@ -14,7 +14,7 @@ public class Prenotazione {
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
-    private int prenotazioneId;
+    private int id;
     private LocalDate dataPrenotazione;
     private String preferenzeDipendente;//tipo volo ,alloggio
 @ManyToOne
@@ -26,9 +26,10 @@ private Viaggio viaggio;
 private Dipendente dipendente;
 
 
-
-    public Prenotazione(LocalDate dataPrenotazione, String preferenzeDipendente) {
+    public Prenotazione(LocalDate dataPrenotazione, String preferenzeDipendente, Viaggio viaggio, Dipendente dipendente) {
         this.dataPrenotazione = dataPrenotazione;
         this.preferenzeDipendente = preferenzeDipendente;
+        this.viaggio = viaggio;
+        this.dipendente = dipendente;
     }
 }
