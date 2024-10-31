@@ -14,16 +14,18 @@ public class Dipendente {
     @GeneratedValue
     @Setter(AccessLevel.NONE)
     private int id;
+
     private String username;
     private String nome;
     private String cognome;
     private String email;
-    private String imgProfilo; //lo Uso per l'upload
+    private String imgProfilo;
 
-    public Dipendente(String username, String nome, String cognome, String email) {
+    public Dipendente(String username, String nome, String cognome, String email, String imgProfilo) {
         this.username = username;
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
+        this.imgProfilo = imgProfilo;
     }
 }

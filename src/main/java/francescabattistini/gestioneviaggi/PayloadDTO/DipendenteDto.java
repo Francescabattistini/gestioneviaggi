@@ -15,6 +15,9 @@ public record DipendenteDto(
         String Cognome,
         @NotEmpty(message = "l'email è obbligatoria!")
         @Email(message = "inserire una email valida!")
-        String email)
+        String email,
+        @NotEmpty(message = "l'immagine profilo è obbligatoria")
+        String imgProfilo
+)
 {
 }
