@@ -19,11 +19,11 @@ public class Viaggio {
     private int id;
     private String destinazione;
     private LocalDate dataviaggio;
-    private String statoProgrammazione;
+    private String statoPrenotazione;//in programma o completato
 
-    public Viaggio(String destinazione, LocalDate dataviaggio, String statoProgrammazione) {
+    public Viaggio(String destinazione, LocalDate dataviaggio, String statoPrenotazione) {
         this.destinazione = destinazione;
         this.dataviaggio = dataviaggio;
-        this.statoProgrammazione = statoProgrammazione;
+        this.statoPrenotazione = statoPrenotazione;
     }
 }
