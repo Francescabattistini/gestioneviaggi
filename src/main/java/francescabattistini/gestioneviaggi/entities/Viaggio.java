@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Table(name="viaggio")
 public class Viaggio {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Setter(AccessLevel.NONE)
     private int viaggioId;
     private String destinazione;

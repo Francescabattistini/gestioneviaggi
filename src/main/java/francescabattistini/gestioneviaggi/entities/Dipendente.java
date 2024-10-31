@@ -11,7 +11,7 @@ import lombok.*;
 @Table(name="dipendente")
 public class Dipendente {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Setter(AccessLevel.NONE)
     private int dipendenteId;
     private String username;

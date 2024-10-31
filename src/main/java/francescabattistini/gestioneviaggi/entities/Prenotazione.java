@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Table(name="prenotazione")
 public class Prenotazione {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Setter(AccessLevel.NONE)
     private int prenotazioneId;
     private LocalDate dataPrenotazione;
