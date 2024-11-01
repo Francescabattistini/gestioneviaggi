@@ -1,7 +1,5 @@
 package francescabattistini.gestioneviaggi.Services;
-
 import francescabattistini.gestioneviaggi.PayloadDTO.ViaggioDto;
-import francescabattistini.gestioneviaggi.entities.Prenotazione;
 import francescabattistini.gestioneviaggi.entities.Viaggio;
 import francescabattistini.gestioneviaggi.exceptions.NotFoundException;
 import francescabattistini.gestioneviaggi.repository.ViaggioRepository;
@@ -11,7 +9,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PatchMapping;
 @Service
 public class ViaggioService {
     @Autowired
@@ -34,20 +31,14 @@ public class ViaggioService {
                 body.statoprenotazione());
         return this.viaggioRepository.save(newViaggio);
     }
+    public Viaggio findByIdAndUpdate(long viaggioId, ViaggioDto body) {
+        Viaggio found = this.findViaggioById(viaggioId);
 
-    public Viaggio findByIdAndUpdate(long id, ViaggioDto body) {
-        Viaggio found = this.findViaggioById(id);
         found.setDestinazione(body.destinazione());
         found.setStatoPrenotazione(body.statoprenotazione());
-        found.setDataviaggio(body.dataviaggio());
+        found.setStatoPrenotazione(String.valueOf(body.dataviaggio()));
 
         return this.viaggioRepository.save(found);
-    }
-
-    public Viaggio findByAndUpdate(long id, String statoPrenotazione) {
-        Viaggio viaggio = this.findViaggioById(id);
-        viaggio.setStatoPrenotazione(statoPrenotazione);
-        return this.viaggioRepository.save(viaggio);
     }
 
     public void findByIdAndDelete(long id) {
