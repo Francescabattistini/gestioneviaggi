@@ -16,7 +16,7 @@ public class Viaggio {
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
-    private int id;
+    private long id;
     private String destinazione;
     private LocalDate dataviaggio;
     private String statoPrenotazione;//in programma o completato

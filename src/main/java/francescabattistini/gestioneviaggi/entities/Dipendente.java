@@ -13,7 +13,8 @@ public class Dipendente {
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
-    private int id;
+    @Column(name = "dipendente_id")
+    private Long id;
 
     private String username;
     private String nome;

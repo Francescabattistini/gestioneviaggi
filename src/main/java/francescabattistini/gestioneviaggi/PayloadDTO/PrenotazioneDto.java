@@ -10,9 +10,9 @@ public record PrenotazioneDto(
         @NotNull(message = "devi inserire le preferenze del dipendente come volo,alloggio! ")
         String preferenzeDipendente,
         @NotNull( message = "id dipendente obbligatorio ")
-        String iddipendente,
+        long iddipendente,
         @NotNull( message = "id viaggio obbligatorio ")
-        String idviaggio
+        long idviaggio
         )
 {
 }

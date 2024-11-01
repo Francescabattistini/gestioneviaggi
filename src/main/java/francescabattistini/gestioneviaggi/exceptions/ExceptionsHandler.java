@@ -28,6 +28,6 @@ public class ExceptionsHandler {
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) // 500
 	public ErrorsResponseDto handleGeneric(Exception ex) {
 		ex.printStackTrace();
-		return new ErrorsResponseDto("problema errore interno del server", LocalDateTime.now());
+		return new ErrorsResponseDto("oh noo!! Errore interno del server,ci scusiamo e risolveremo a breve", LocalDateTime.now());
 	}
 }

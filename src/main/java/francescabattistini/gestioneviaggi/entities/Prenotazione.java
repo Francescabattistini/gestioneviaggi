@@ -14,7 +14,7 @@ public class Prenotazione {
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
-    private int id;
+    private Long id;
     private LocalDate dataPrenotazione;
     private String preferenzeDipendente;//tipo volo ,alloggio
 @ManyToOne

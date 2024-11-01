@@ -5,12 +5,12 @@ import francescabattistini.gestioneviaggi.Services.DipendenteService;
 import francescabattistini.gestioneviaggi.entities.Dipendente;
 import francescabattistini.gestioneviaggi.exceptions.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 import java.util.stream.Collectors;
 /*1. GET http://localhost:3003/dipendente
 2. POST http://localhost:3003/dipendente (+ dto)
@@ -24,53 +24,45 @@ import java.util.stream.Collectors;
 @RequestMapping("/dipendente")
 public class DipendenteController {
 
-     @Autowired
-        DipendenteService dipendenteService;
+    @Autowired
+    DipendenteService dipendenteService;
 
-        // 1. GET
-        @GetMapping
-        public List<Dipendente> findAll(){
-            return this.dipendenteService.findAll();
+    @GetMapping
+    public Page<Dipendente> findDipendenteAll(@RequestParam(defaultValue = "0") int page,
+                                    @RequestParam(defaultValue = "10") int size,
+                                    @RequestParam(defaultValue = "id") String sortBy) {
+        return this.dipendenteService.findAll(page, size, sortBy);
+    }
+
+    @GetMapping("/{dipeId}")
+    public Dipendente findDipendenteByid(@PathVariable long dipendenteId) {
+        return this.dipendenteService.findById(dipendenteId);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Dipendente save(@RequestBody @Validated DipendenteDto body, BindingResult validationResult) {
+        if (validationResult.hasErrors()) {
+            String message = validationResult.getAllErrors().stream().map(objectError -> objectError.getDefaultMessage())
+                    .collect(Collectors.joining(". "));
+            throw new BadRequestException("Ci sono stati errori nel payload! " + message);
         }
-
-
-        //2.POST
-
-        @PostMapping
-        @ResponseStatus(HttpStatus.CREATED)
-        public Dipendente save(@RequestBody @Validated DipendenteDto body, BindingResult validationResult) {
-            if (validationResult.hasErrors()) {
-                String message = validationResult.getAllErrors().stream().map(objectError -> objectError.getDefaultMessage())
-                        .collect(Collectors.joining(". "));
-                throw new BadRequestException("Ci sono stati errori nel payload! " + message);
-            }
-
             return this.dipendenteService.save(body);
-        }
-
-        //3. GET  ( dipendente specifico)
-        @GetMapping("/{dipendenteId}")
-        public Dipendente
-        findAuthorByid(@PathVariable int authorId){
-            return this.dipendenteService.findAuthorById(authorId);
-        }
+    }
+    @PutMapping("/{dipeId}")
+    public Dipendente findDipendenteByIdAndUpdate(@PathVariable long dipendenteId, @RequestBody DipendenteDto body) {
+        return this.dipendenteService.findByIdAndUpdate(dipendenteId, body);
+    }
 
 
-
-        //4 PUT
-        @PutMapping("/{blogId}")
-        public Dipendente findAuthorByIdAndUpdate(@PathVariable int authorId, @RequestBody DipendenteDto body){
-            return this.dipendenteService.findAuthoreByIdAndUpdate(authorId,body);
-        }
-
-
-
-
-        //5 DELETE
-        @DeleteMapping("/{blogId}")
-        @ResponseStatus(HttpStatus.NO_CONTENT)//204
-        public void findAuthorIdAndDelate(@PathVariable int authorId){
-            this.dipendenteService.findauthorByIdAndDelete(authorId);
-        }
+    @DeleteMapping("/{dipeId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)//204
+    public void findDipendenteIdAndDelate(@PathVariable long dipendenteId) {
+        this.dipendenteService.findByIdAndDelete(dipendenteId);
+    }
+    @PatchMapping("/{dipeId}/img")
+    public String uploadImg(@RequestParam("Img") MultipartFile file) {
+        return this.dipendenteService.uploadImgProfilo(file);
+    }
 
 }
