@@ -26,6 +26,8 @@ public class DipendenteService {
 
     @Autowired
     private Cloudinary cloudinaryUploader;
+
+
     public Page<Dipendente> findAll(int page, int size, String sortBy) {
         if (page > 15) page = 15;
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
@@ -42,13 +44,13 @@ public class DipendenteService {
                     throw new BadRequestException("Email " + body.email() + " già in uso!");
                 }
         );
-        Dipendente dipendente = new Dipendente(
+        Dipendente dipe = new Dipendente(
                 body.username(),
                 body.nome(),
                 body.cognome(),
                 body.email(),
                 "https://ui-avatars.com/api/?name=" + body.nome() + "+" + body.cognome());
-        return this.dipendenteRepository.save(dipendente);
+        return this.dipendenteRepository.save(dipe);
     }
 
 
@@ -80,7 +82,7 @@ public class DipendenteService {
         try {
             url = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
         } catch (IOException e) {
-            throw new BadRequestException("Ci sono stati problemi con l'upload del file!");
+            throw new BadRequestException("Attenzione errore nel carricamento del file!");
         }
         return url;
     }

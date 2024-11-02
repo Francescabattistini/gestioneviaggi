@@ -30,7 +30,7 @@ public class DipendenteController {
     @GetMapping
     public Page<Dipendente> findDipendenteAll(@RequestParam(defaultValue = "0") int page,
                                     @RequestParam(defaultValue = "10") int size,
-                                    @RequestParam(defaultValue = "id") String sortBy) {
+                                    @RequestParam(defaultValue = "nome") String sortBy) {
         return this.dipendenteService.findAll(page, size, sortBy);
     }
 
@@ -61,8 +61,8 @@ public class DipendenteController {
         this.dipendenteService.findByIdAndDelete(dipendenteId);
     }
     @PatchMapping("/{dipeId}/img")
-    public String uploadImg(@RequestParam("Img") MultipartFile file) {
-        return this.dipendenteService.uploadImgProfilo(file);
+    public String uploadImg(@RequestParam("Img") MultipartFile immagine) {
+        return this.dipendenteService.uploadImgProfilo(immagine);
     }
 
 }

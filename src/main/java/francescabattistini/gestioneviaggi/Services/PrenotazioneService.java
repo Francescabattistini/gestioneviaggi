@@ -43,7 +43,7 @@ public class PrenotazioneService {
 
        repositoryPrenotazione.findByIddipendenteAndDataPrenotazione(dipendente, body.dataPrenotazione())
                 .ifPresent(existingPrenotazione -> {
-                    throw new BadRequestException("Questa data non è disponibile ");
+                    throw new BadRequestException("Questa data non è disponibile !");
                 });
 
         Prenotazione newPrenotazione = new Prenotazione( body.dataPrenotazione(), body.preferenzeDipendente(),viaggio, dipendente);
@@ -51,7 +51,6 @@ public class PrenotazioneService {
     }
     public Prenotazione findByIdAndUpdate(long id, PrenotazioneDto body) {
         Prenotazione found = this.findPrenotazioneById(id);
-
         found.setPreferenzeDipendente(body.preferenzeDipendente());
         found.setDataPrenotazione(body.dataPrenotazione());
 

@@ -22,7 +22,7 @@ public class ViaggioController {
     @GetMapping
     public Page<Viaggio> findDipendenteAll(@RequestParam(defaultValue = "0") int page,
                                               @RequestParam(defaultValue = "10") int size,
-                                              @RequestParam(defaultValue = "id") String sortBy) {
+                                              @RequestParam(defaultValue = "destinazione") String sortBy) {
         return this.viaggioService.findAll(page, size, sortBy);
     }
 
@@ -55,4 +55,6 @@ public class ViaggioController {
     public void findByIdAndDelete(@PathVariable long id) {
         this.viaggioService.findByIdAndDelete(id);
     }
+
+
 }

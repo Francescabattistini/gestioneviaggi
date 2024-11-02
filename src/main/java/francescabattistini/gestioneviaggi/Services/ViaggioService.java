@@ -25,25 +25,25 @@ public class ViaggioService {
         return this.viaggioRepository.findById(viaggioId).orElseThrow(() -> new NotFoundException(viaggioId));
     }
     public Viaggio save(ViaggioDto body) {
-        Viaggio newViaggio = new Viaggio(
+        Viaggio Viaggio = new Viaggio(
                 body.destinazione(),
                 body.dataviaggio(),
                 body.statoprenotazione());
-        return this.viaggioRepository.save(newViaggio);
+        return this.viaggioRepository.save(Viaggio);
     }
     public Viaggio findByIdAndUpdate(long viaggioId, ViaggioDto body) {
-        Viaggio found = this.findViaggioById(viaggioId);
+        Viaggio viaggio = this.findViaggioById(viaggioId);
 
-        found.setDestinazione(body.destinazione());
-        found.setStatoPrenotazione(body.statoprenotazione());
-        found.setStatoPrenotazione(String.valueOf(body.dataviaggio()));
+        viaggio.setDestinazione(body.destinazione());
+        viaggio.setStatoPrenotazione(body.statoprenotazione());
+        viaggio.setStatoPrenotazione(String.valueOf(body.dataviaggio()));
 
-        return this.viaggioRepository.save(found);
+        return this.viaggioRepository.save(viaggio);
     }
 
     public void findByIdAndDelete(long id) {
-        Viaggio found = this.findViaggioById(id);
-        this.viaggioRepository.delete(found);
+        Viaggio viaggio = this.findViaggioById(id);
+        this.viaggioRepository.delete(viaggio);
     }
 
 

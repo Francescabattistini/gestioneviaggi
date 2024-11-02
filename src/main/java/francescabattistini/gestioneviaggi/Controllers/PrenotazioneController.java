@@ -22,7 +22,7 @@ public class PrenotazioneController {
     @GetMapping
     public Page<Prenotazione> findAll(@RequestParam(defaultValue = "0") int page,
                                     @RequestParam(defaultValue = "10") int size,
-                                    @RequestParam(defaultValue = "id") String sortBy) {
+                                    @RequestParam(defaultValue = "dataPrenotazione") String sortBy) {
         return this.prenotazioneService.findPrenotazioneAll(page, size, sortBy);
     }
 
@@ -49,6 +49,7 @@ public class PrenotazioneController {
     @DeleteMapping("/{prenotazioneId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable long id) {
+
         this.prenotazioneService.findByIdAndDelete(id);
     }
 
